@@ -8,5 +8,6 @@
   "close": "Close",
   "dark_mode_on": "Dark mode on.",
   "bright_mode_on": "Bright mode on.",
-  "new_lang": "Language changed"
+  "new_lang": "Language changed",
+  "delete":"Delete"
 }

@@ -41,9 +41,9 @@ func GetNotes(c echo.Context) error {
 }
 
 func DeleteNote(c echo.Context) error {
-	var note models.Note
+	var notes []models.Note
 	db := ConnectDatabase()
-	db.Delete(&note, c.QueryParam("id"))
+	db.Unscoped().Delete(&notes, "id = ?", c.QueryParam("id"))
 
-	return c.JSON(http.StatusOK, "deleted")
+	return c.JSON(http.StatusOK, true)
 }

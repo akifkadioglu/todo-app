@@ -6,15 +6,21 @@
           <th class="text-center">{{ $t("id") }}</th>
           <th class="text-center">{{ $t("name") }}</th>
           <th class="text-center">{{ $t("content") }}</th>
+          <th class="text-center">{{ $t("delete") }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in TodoList" :key="item.name">
+        <tr v-for="(item, i) in TodoList" :key="item.name">
           <td>{{ item.ID }}</td>
           <td>{{ item.Title }}</td>
           <td>
             <v-btn depressed color="primary">
-              <v-icon > mdi-eye </v-icon>
+              <v-icon> mdi-eye </v-icon>
+            </v-btn>
+          </td>
+          <td>
+            <v-btn depressed color="error" @click="deleteTask(item.ID, i)">
+              <v-icon> mdi-delete-outline </v-icon>
             </v-btn>
           </td>
         </tr>
@@ -46,6 +52,15 @@ export default {
       this.axios.get(this.api + "/getNotes").then((response) => {
         this.TodoList = response.data;
       });
+    },
+    deleteTask(id, index) {
+      this.axios
+        .delete(this.api + "/deleteNote", { params: { id } })
+        .then((response) => {
+          if (response.data) {
+            this.TodoList.splice(index, 1);
+          }
+        });
     },
   },
 };
