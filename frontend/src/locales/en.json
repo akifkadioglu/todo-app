@@ -1,0 +1,12 @@
+{
+  "header": "To do list",
+  "tr": "Türkçe",
+  "en": "English",
+  "id": "ID",
+  "name": "Name",
+  "content": "Description",
+  "close": "Close",
+  "dark_mode_on": "Dark mode on.",
+  "bright_mode_on": "Bright mode on.",
+  "new_lang": "Language changed"
+}
