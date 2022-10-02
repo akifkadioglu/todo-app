@@ -14,17 +14,12 @@
             </v-btn>
           </div>
           <div>{{ $t("header") }}</div>
-          <div>
-            <v-btn depressed color="primary">
-              <v-icon> mdi-pencil </v-icon>
-            </v-btn>
-          </div>
+          <HomeCreateTask />
         </div>
         <v-divider></v-divider>
         <HomeContent />
       </v-card-text>
     </v-card>
-    <Snackbar />
     <HomeBottombar />
   </div>
 </template>
@@ -34,7 +29,7 @@
 import HomeAppbar from "@/components/Home/Appbar.vue";
 import HomeBottombar from "@/components/Home/Bottombar.vue";
 import HomeContent from "@/components/Home/Content.vue";
-import Snackbar from "@/components/Snackbar.vue";
+import HomeCreateTask from "@/components/Task/CreateTask.vue";
 
 export default {
   name: "Home",
@@ -42,7 +37,7 @@ export default {
     HomeAppbar,
     HomeBottombar,
     HomeContent,
-    Snackbar,
+    HomeCreateTask,
   },
   data() {
     return {
@@ -52,11 +47,16 @@ export default {
   methods: {
     changeTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem(
+        this.$store.state.darkmode,
+        !this.$vuetify.theme.dark ? "0" : "1"
+      );
       this.$store.state.snackbar = true;
       this.$store.state.snackbarMessage = this.$vuetify.theme.dark
         ? this.$t("dark_mode_on")
         : this.$t("bright_mode_on");
     },
+    addNote() {},
   },
 };
 </script>

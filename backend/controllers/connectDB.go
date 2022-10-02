@@ -30,7 +30,7 @@ func ConnectDatabase() gorm.DB {
 	dsn := dbAddress + config.GoDotEnvVariable("DB_DATABASE") + "?charset=utf8mb4&parseTime=True&loc=Local"
 	fmt.Println(dsn)
 	db, err := gorm.Open(mysql.Open(dsn))
-	db.AutoMigrate(&models.Note{})
+	db.AutoMigrate(&models.Task{})
 	if err != nil {
 		panic(err.Error())
 	}

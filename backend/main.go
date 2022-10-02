@@ -15,10 +15,10 @@ func main() {
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 	/* urls */
-	network.POST("/addNote", controllers.AddNote)
-	network.POST("/getNote", controllers.GetNote)
-	network.GET("/getNotes", controllers.GetNotes)
-	network.DELETE("/deleteNote", controllers.DeleteNote)
+	network.POST("/addTask", controllers.AddTask)
+	network.POST("/getTask", controllers.GetTask)
+	network.GET("/getTasks", controllers.GetTasks)
+	network.DELETE("/deleteTask", controllers.DeleteTask)
 	/* urls */
 	port := ":" + config.GoDotEnvVariable("APP_PORT")
 	network.Logger.Fatal(network.Start(port))

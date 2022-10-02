@@ -5,9 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    darkmode: "darkmode",
     lang: "locale",
     snackbar: false,
-    snackbarMessage: ""
+    snackbarMessage: "",
+    newTask: {},
+    overlay: false
   },
   mutations: {
   },

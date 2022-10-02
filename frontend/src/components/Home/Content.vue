@@ -1,5 +1,5 @@
 <template>
-  <v-simple-table>
+  <v-simple-table fixed-header height="520px">
     <template v-slot:default>
       <thead>
         <tr>
@@ -12,11 +12,9 @@
       <tbody>
         <tr v-for="(item, i) in TodoList" :key="item.name">
           <td>{{ item.ID }}</td>
-          <td>{{ item.Title }}</td>
+          <td class="tableRow">{{ item.title }}</td>
           <td>
-            <v-btn depressed color="primary">
-              <v-icon> mdi-eye </v-icon>
-            </v-btn>
+            <ContentShowTask :id="item.ID" />
           </td>
           <td>
             <v-btn depressed color="error" @click="deleteTask(item.ID, i)">
@@ -30,40 +28,45 @@
 </template>
 
 <script>
+import ContentShowTask from "../Task/ShowTask.vue";
 export default {
   mounted() {
     this.getTodoList();
   },
+  components: {
+    ContentShowTask,
+  },
   data() {
     return {
-      TodoList: [
-        {
-          CreatedAt: "2022-10-02T06:21:05.278+03:00",
-          ID: 1,
-          Title: "not 1",
-          Description: "dsaf",
-        },
-      ],
+      TodoList: [],
       api: process.env.VUE_APP_BASE_URL,
     };
   },
   methods: {
     getTodoList() {
-      this.axios.get(this.api + "/getNotes").then((response) => {
+      this.axios.get(this.api + "/getTasks").then((response) => {
         this.TodoList = response.data;
       });
     },
     deleteTask(id, index) {
+      this.$store.state.overlay = true;
       this.axios
-        .delete(this.api + "/deleteNote", { params: { id } })
+        .delete(this.api + "/deleteTask", { params: { id } })
         .then((response) => {
           if (response.data) {
             this.TodoList.splice(index, 1);
           }
+          this.$store.state.overlay = false;
         });
     },
   },
 };
 </script>
-
-<style></style>
+<style scoped>
+.tableRow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+</style>

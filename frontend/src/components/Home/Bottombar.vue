@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     changeLang(lang) {
+      this.$moment.locale(lang)
       var isChanged = false;
       this.$i18n.locale = lang;
       isChanged = lang != localStorage.getItem(this.$store.state.lang);

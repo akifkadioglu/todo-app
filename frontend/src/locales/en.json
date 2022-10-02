@@ -9,5 +9,11 @@
   "dark_mode_on": "Dark mode on.",
   "bright_mode_on": "Bright mode on.",
   "new_lang": "Language changed",
-  "delete":"Delete"
+  "delete": "Delete",
+  "createTask": "Create Task",
+  "save": "Save",
+  "required": "Required.",
+  "title": "Title",
+  "description": "Description",
+  "taskCreated": "Task created"
 }

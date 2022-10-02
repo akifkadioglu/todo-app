@@ -1,28 +1,35 @@
 package controllers
 
 import (
-	"github.com/labstack/echo/v4"
 	"myapp/messages"
 	"myapp/models"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
-func AddNote(c echo.Context) error {
+func AddTask(c echo.Context) error {
+	db := ConnectDatabase()
 
-	note := models.Note{
+	task := models.Task{
 		Title:       c.QueryParam("title"),
 		Description: c.QueryParam("description"),
 	}
-	db := ConnectDatabase()
-	db.Create(&note)
-	return c.JSON(http.StatusOK, note)
+	if len(task.Title) != 0 {
+		db.Create(&task)
+		return c.JSON(http.StatusOK, task)
+
+	}
+	return c.JSON(http.StatusBadRequest, map[string]string{
+		"error": messages.CantBeNull,
+	})
 }
 
-func GetNote(c echo.Context) error {
-	var note models.Note
+func GetTask(c echo.Context) error {
+	var task models.Task
 
 	db := ConnectDatabase()
-	result := db.First(&note, c.QueryParam("id"))
+	result := db.First(&task, c.QueryParam("id"))
 	statusCode := 200
 	if result.Error != nil {
 		statusCode = 400
@@ -30,20 +37,20 @@ func GetNote(c echo.Context) error {
 			"error": messages.DoesntExist,
 		})
 	}
-	return c.JSON(statusCode, note)
+	return c.JSON(statusCode, task)
 }
 
-func GetNotes(c echo.Context) error {
-	var notes []models.Note
+func GetTasks(c echo.Context) error {
+	var tasks []models.Task
 	db := ConnectDatabase()
-	db.Find(&notes)
-	return c.JSON(http.StatusOK, notes)
+	db.Find(&tasks)
+	return c.JSON(http.StatusOK, tasks)
 }
 
-func DeleteNote(c echo.Context) error {
-	var notes []models.Note
+func DeleteTask(c echo.Context) error {
+	var tasks []models.Task
 	db := ConnectDatabase()
-	db.Unscoped().Delete(&notes, "id = ?", c.QueryParam("id"))
+	db.Delete(&tasks, "id = ?", c.QueryParam("id"))
 
 	return c.JSON(http.StatusOK, true)
 }

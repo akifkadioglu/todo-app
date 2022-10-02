@@ -9,5 +9,11 @@
   "dark_mode_on": "Karanlık mod açık.",
   "bright_mode_on": "Parlak mod açık.",
   "new_lang": "Dil değiştirildi",
-  "delete":"Sil"
+  "delete": "Sil",
+  "createTask": "Görev oluştur",
+  "save": "Kaydet",
+  "required": "Zorunlu alan.",
+  "title": "Başlık",
+  "description": "Açıklama",
+  "taskCreated": "Görev oluşturuldu"
 }
