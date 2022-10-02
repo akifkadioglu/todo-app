@@ -10,7 +10,8 @@ export default new Vuex.Store({
     snackbar: false,
     snackbarMessage: "",
     newTask: {},
-    overlay: false
+    overlay: false,
+    isLoading: false
   },
   mutations: {
   },

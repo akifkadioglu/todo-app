@@ -16,7 +16,6 @@
                   {{ $t($i18n.locale) }}
                 </v-btn>
               </template>
-
               <v-list>
                 <v-list-item v-for="(lang, i) in langs" :key="`Lang${i}`">
                   <v-list-item-title style="text-align: center">
@@ -33,15 +32,19 @@
     </v-card>
   </div>
 </template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 
 <script>
 export default {
   data() {
-    return { langs: ["tr", "en"] };
+    return {
+      langs: ["tr", "en"],
+    };
   },
+
   methods: {
     changeLang(lang) {
-      this.$moment.locale(lang)
+      this.$moment.locale(lang);
       var isChanged = false;
       this.$i18n.locale = lang;
       isChanged = lang != localStorage.getItem(this.$store.state.lang);

@@ -43,7 +43,7 @@ func GetTask(c echo.Context) error {
 func GetTasks(c echo.Context) error {
 	var tasks []models.Task
 	db := ConnectDatabase()
-	db.Find(&tasks)
+	db.Order("created_at desc").Find(&tasks)
 	return c.JSON(http.StatusOK, tasks)
 }
 

@@ -31,6 +31,7 @@
 import ContentShowTask from "../Task/ShowTask.vue";
 export default {
   mounted() {
+    this.$store.state.isLoading = true;
     this.getTodoList();
   },
   components: {
@@ -42,10 +43,19 @@ export default {
       api: process.env.VUE_APP_BASE_URL,
     };
   },
+  computed: {
+    computedList: function () {
+      var vm = this;
+      return this.TodoList.filter(function (item) {
+        return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1;
+      });
+    },
+  },
   methods: {
     getTodoList() {
       this.axios.get(this.api + "/getTasks").then((response) => {
         this.TodoList = response.data;
+        this.$store.state.isLoading = false;
       });
     },
     deleteTask(id, index) {
